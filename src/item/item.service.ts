@@ -21,7 +21,7 @@ let items: Item[] = [
     id: 2,
     name: "Exercise",
     description: "Do more exercise, improve health care",
-    color: "blue",
+    color: "red",
     deadline: "-",
     priority: 2,
     status: 1
