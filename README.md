@@ -17,4 +17,7 @@ Run image:
 
 `docker run -p 49160:7000 to-do-app`
 
+## Docker compose guid
+Compose up env:
 
+`docker-compose up -d`

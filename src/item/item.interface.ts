@@ -1,5 +1,4 @@
-export interface Item {
-    id: number;
+export interface IItem {
     name: string;
     priority: number;
     deadline: string;

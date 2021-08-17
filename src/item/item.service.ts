@@ -1,48 +1,25 @@
-/**
- * Data Model Interfaces
- */
+import { IItem } from "./item.interface";
+import Item from "./item.model";
 
-import { Item } from "../item/item.interface";
+export const findAll = async (limit = 25, page = 0): Promise<IItem[]> => {
+  return Item.find()
+      .limit(limit)
+      .skip(limit * page)
+      .exec();
+}
 
-/**
- * In-Memory Store
- */
-let items: Item[] = [
-  {
-    id: 1,
-    name: "Study node",
-    description: "Read articles and watch demos on youtube",
-    color: "blue",
-    deadline: "-",
-    priority: 1,
-    status: 1
-  },  
-  {
-    id: 2,
-    name: "Exercise",
-    description: "Do more exercise, improve health care",
-    color: "red",
-    deadline: "-",
-    priority: 2,
-    status: 1
-  },
-];
+export const find = async (id: number): Promise<IItem> => {
+  return Item.findOne({ id: id }).exec();
+}
 
-/**
- * Service Methods
- */
-
-export const findAll = async (): Promise<Item[]> => Object.values(items);
-
-export const find = async (id: number): Promise<Item> => items[id];
-
-
-export const create = async (newItem: Item): Promise<Item> => {
+export const create = async (newItem: IItem): Promise<number> => {
     const id = new Date().valueOf();
-  
-    items[id] = {
-      ...newItem,
-    };
-  
-    return items[id];
-  };
+
+    const itemSaved = new Item({
+        _id: id,
+        ...newItem,
+        permissionFlags: 1,
+    });
+    await itemSaved.save();
+    return id;
+}
