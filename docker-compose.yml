@@ -6,3 +6,15 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
+  app:
+    container_name: app
+    restart: always
+    build: .
+    command: npm run dev
+    ports:
+      - "7000:7000"
+    depends_on:
+      - mongo    
+    environment:
+      CONNECTION_URL: mongodb://mongo:27017/to-do-list
+      PORT: 7000
