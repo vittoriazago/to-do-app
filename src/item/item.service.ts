@@ -8,17 +8,15 @@ export const findAll = async (limit = 25, page = 0): Promise<IItem[]> => {
       .exec();
 }
 
-export const find = async (id: number): Promise<IItem> => {
+export const find = async (id: number): Promise<IItem | null> => {
   return Item.findOne({ id: id }).exec();
 }
 
-export const create = async (newItem: IItem): Promise<number> => {
-    const id = new Date().valueOf();
-
+export const create = async (newItem: IItem): Promise<IItem> => {
     const itemSaved = new Item({
         ...newItem,
         permissionFlags: 1,
     });
     await itemSaved.save();
-    return id;
+    return itemSaved;
 }

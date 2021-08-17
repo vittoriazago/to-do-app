@@ -1,8 +1,9 @@
 import mongooseService from "../db/mongoose.service";
+import { IItem } from "./item.interface";
   
-const Schema = mongooseService.getMongoose().Schema;
+const mongoClient = mongooseService.getMongoose();
 
-const itemSchema = new Schema({    
+const itemSchema = new mongoClient.Schema({    
   name: String,
   priority: Number,
   deadline: String,
@@ -11,6 +12,6 @@ const itemSchema = new Schema({
   status: Number,
 }),
 
-Item = mongooseService.getMongoose().model('lists', itemSchema);
+Item = mongoClient.model<IItem>('lists', itemSchema);
 
 export default Item;

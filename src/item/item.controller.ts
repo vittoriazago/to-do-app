@@ -2,9 +2,9 @@ import express, { Request, Response } from "express";
 import { IItem } from "./item.interface";
 import * as ItemService from "./item.service";
 
-export const itemsRouter = express.Router();
+export class ItemController {
 
-itemsRouter.get("/", async (req: Request, res: Response) => {
+  getItems = async (req: Request, res: Response) => {
     try {
       let page = parseInt(req.query.page as string);
       let limit = parseInt(req.query.limit as string);
@@ -14,10 +14,10 @@ itemsRouter.get("/", async (req: Request, res: Response) => {
     } catch (e) {
       res.status(500).send(e.message);
     }
-  });
+  };
 
 
-itemsRouter.post("/", async (req: Request, res: Response) => {
+  saveItem = async (req: Request, res: Response) => {
     try {
       const item: IItem = req.body;
   
@@ -27,4 +27,8 @@ itemsRouter.post("/", async (req: Request, res: Response) => {
     } catch (e) {
       res.status(500).send(e.message);
     }
-  });
+  };
+
+}
+
+export default new ItemController();
