@@ -16,7 +16,6 @@ export const create = async (newItem: IItem): Promise<number> => {
     const id = new Date().valueOf();
 
     const itemSaved = new Item({
-        _id: id,
         ...newItem,
         permissionFlags: 1,
     });

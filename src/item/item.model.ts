@@ -11,6 +11,6 @@ const itemSchema = new Schema({
   status: Number,
 }),
 
-Item = mongooseService.getMongoose().model('list', itemSchema);
+Item = mongooseService.getMongoose().model('lists', itemSchema);
 
 export default Item;
